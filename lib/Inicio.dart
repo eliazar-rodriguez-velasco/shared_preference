@@ -17,14 +17,14 @@ class _RegistroState extends State<Registro> {
   String contrasena = '';
   String correoElectronico = '';
 
-
-
   final _U = TextEditingController();
   final _CA = TextEditingController();
   final _CO = TextEditingController();
 
   String GN = '';
-  String GC= '';
+  // ignore: non_constant_identifier_names
+  String GC = '';
+
 
   @override
   Widget build(BuildContext context) {
@@ -72,13 +72,12 @@ class _RegistroState extends State<Registro> {
                             child: Container(
                               margin: EdgeInsets.only(right: 22.0, left: 22.0),
                               child: TextFormField(
-                                validator: (valor) => valor.length < 1
-                                    ? 'faltan letras'
-                                    : null,
+                                validator: (valor) =>
+                                    valor.length < 1 ? 'faltan letras' : null,
                                 controller: _U,
                                 onSaved: (valor) => _usuario = valor,
                                 decoration:
-                                InputDecoration(labelText: 'Usuario'),
+                                    InputDecoration(labelText: 'Usuario'),
                               ),
                             ),
                           )
@@ -104,7 +103,7 @@ class _RegistroState extends State<Registro> {
                                     : null,
                                 onSaved: (valor) => _contrasena = valor,
                                 decoration:
-                                InputDecoration(labelText: 'Contraseña'),
+                                    InputDecoration(labelText: 'Contraseña'),
                                 obscureText: true,
                               ),
                             ),
@@ -137,7 +136,6 @@ class _RegistroState extends State<Registro> {
                         ],
                       ),
                     ),
-
                     SizedBox(height: 25.0),
                     Padding(
                       padding: const EdgeInsets.all(25.0),
@@ -185,6 +183,8 @@ class _RegistroState extends State<Registro> {
     _Login();
   }
 
+
+  // ignore: non_constant_identifier_names
   Future _Login() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     if (pref.getBool('_sesion')) {
@@ -223,20 +223,20 @@ class _RegistroState extends State<Registro> {
                 padding: const EdgeInsets.all(10),
                 child: Text('$GC'),
               ),
-              SizedBox(height: 20.0),
+              SizedBox(height: 22.0),
               Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(22.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
                   child: Container(
                     height: 60,
                     child: MaterialButton(
-                      onPressed: (){
-                        cerrar();
+                      onPressed: () {
+                        salir();
                       },
                       color: Colors.blueGrey[600],
                       child: Text(
-                        'Cerrar Sesión',
+                        'salir',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -253,6 +253,7 @@ class _RegistroState extends State<Registro> {
     }
   }
 
+  // ignore: non_constant_identifier_names
   void Page() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setBool('_sesion', true);
@@ -278,7 +279,6 @@ class _RegistroState extends State<Registro> {
                 style: TextStyle(fontSize: 25),
               ),
             ),
-
             SizedBox(
               height: 10,
             ),
@@ -293,20 +293,20 @@ class _RegistroState extends State<Registro> {
               padding: const EdgeInsets.all(10),
               child: Text(correoElectronico),
             ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 22.0),
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(22.0),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(7),
                 child: Container(
                   height: 60,
                   child: MaterialButton(
                     onPressed: () {
-                      cerrar();
+                      salir();
                     },
                     color: Colors.blueGrey,
                     child: Text(
-                      'Cerrar Sesión',
+                      'salir',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -321,17 +321,17 @@ class _RegistroState extends State<Registro> {
       );
     }));
   }
-  Future<void> cerrar() async {
+
+  Future<void> salir() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setBool('_sesion', false);
     setState(() {
-      GN= '';
+      GN = '';
       GC = '';
     });
     Navigator.pop(context);
-
-
   }
+
 
   Future<void> obtener() async {
     SharedPreferences datos = await SharedPreferences.getInstance();
@@ -340,6 +340,7 @@ class _RegistroState extends State<Registro> {
       GC = datos.get('correo') ?? correoElectronico;
     });
   }
+
 
   Future<void> guardar() async {
     SharedPreferences datos = await SharedPreferences.getInstance();
